@@ -31,7 +31,10 @@ const resolvers = {
   
   Product: {
     priceWithDiscount(product) {
-      return product.price + (product.price * (product.discount / 100))
+      if(product.discount)
+        return product.price + (product.price * (product.discount / 100))
+      
+      return product.price
     }
   },
 
@@ -65,7 +68,7 @@ const resolvers = {
       return {
         name: 'Biscoito',
         price: 1000,
-        discount: 50
+        // discount: 0
       }
     }
   }
