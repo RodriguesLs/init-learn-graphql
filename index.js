@@ -10,17 +10,31 @@ const typeDefs = gql`
     payment: Float
     vip: Boolean
   }
+
+  type Product {
+    name: String!
+    price: Float!
+    discount: Int
+    priceWithDiscount: Float
+  }
   
   type Query {
     ola: String!
     now: Date
     outraQuery: String
     getUser: User
+    getProduct: Product
   }
 `;
 
 const resolvers = {
   
+  Product: {
+    priceWithDiscount(product) {
+      return product.price + (product.price * (product.discount / 100))
+    }
+  },
+
   User: {
     payment(user) {
       return user.payment_value;
@@ -45,6 +59,13 @@ const resolvers = {
         age: 18,
         payment_value: 1245.56,
         vip: true,
+      }
+    },
+    getProduct() {
+      return {
+        name: 'Biscoito',
+        price: 1000,
+        discount: 50
       }
     }
   }
