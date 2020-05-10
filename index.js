@@ -24,6 +24,7 @@ const typeDefs = gql`
     outraQuery: String
     getUser: User
     getProduct: Product
+    sortNumbers: [Int]
   }
 `;
 
@@ -70,6 +71,12 @@ const resolvers = {
         price: 1000,
         // discount: 0
       }
+    },
+    sortNumbers() {
+      const crescis = (a, b) => a - b;
+      return Array(6).fill(0)
+        .map(n => parseInt(Math.random() * 60 +1))
+        .sort(crescis)
     }
   }
 }
