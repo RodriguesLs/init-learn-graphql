@@ -3,19 +3,35 @@ const { ApolloServer, gql } = require('apollo-server');
 const users = [{
   id: 1,
   name: 'Johanes',
-  email: 'johanes@gmail.com'
+  email: 'johanes@gmail.com',
+  profile_id: 1,
 }, {
   id: 2,
   name: 'Miriam',
-  email: 'miriam@gmail.com'
+  email: 'miriam@gmail.com',
+  profile_id: 2,
 }, {
   id: 3,
   name: 'Aurelius',
-  email: 'aurelius@gmail.com'
+  email: 'aurelius@gmail.com',
+  profile_id: 1,
+}]
+
+const profiles = [{
+  id: 1,
+  name: 'Common'
+}, {
+  id: 2,
+  name: 'Administrator'
 }]
 
 const typeDefs = gql`
   scalar Date
+  
+  type Profile {
+    id: Int
+    name: String
+  }
 
   type User {
     id: ID
@@ -24,6 +40,7 @@ const typeDefs = gql`
     age: Int
     payment: Float
     vip: Boolean
+    profile: Profile
   }
 
   type Product {
@@ -42,6 +59,8 @@ const typeDefs = gql`
     sortNumbers: [Int]
     getUsers: [User]
     getOnce(id: Int): User
+    getProfiles: [Profile]
+    getProfile(id: Int): Profile
   }
 `;
 
@@ -59,6 +78,10 @@ const resolvers = {
   User: {
     payment(user) {
       return user.payment_value;
+    },
+    profile(user) {
+      const select = profiles.filter(profile => profile.id === user.profile_id);
+      return select ? select[0] : null
     }
   },
 
@@ -101,6 +124,13 @@ const resolvers = {
     getOnce(_, { id }) {
       const select = users.filter(user => user.id === id)
       return select ? select[0] : null
+    },
+    getProfiles() {
+      return profiles
+    },
+    getProfile(_, { id }) {
+      const select = profiles.filter(profile => profile.id === id);
+      return  select ? select[0] : null
     }
   }
 }
