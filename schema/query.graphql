@@ -1,0 +1,12 @@
+type Query {
+  ola: String!
+  now: Date
+  outraQuery: String
+  getUser: User
+  getProduct: Product
+  sortNumbers: [Int]
+  getUsers: [User]
+  getOnce(id: Int): User
+  getProfiles: [Profile]
+  getProfile(id: Int): Profile
+}
