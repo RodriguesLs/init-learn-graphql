@@ -98,8 +98,8 @@ const resolvers = {
     getUsers() {
       return users
     },
-    getOnce(_, args) {
-      const select = users.filter(user => user.id === args.id)
+    getOnce(_, { id }) {
+      const select = users.filter(user => user.id === id)
       return select ? select[0] : null
     }
   }
