@@ -3,6 +3,12 @@ type Profile {
   name: String
 }
 
+enum UserStatus {
+  ACTIVE
+  BLOCK
+  INACTIVE
+} 
+
 type User {
   id: ID
   name: String!
@@ -11,4 +17,5 @@ type User {
   payment: Float
   vip: Boolean
   profile: Profile
+  status: UserStatus
 }

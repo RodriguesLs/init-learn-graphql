@@ -3,16 +3,19 @@ const users = [{
   name: 'Johanes',
   email: 'johanes@gmail.com',
   profile_id: 1,
+  status: 'ACTIVE',
 }, {
   id: 2,
   name: 'Miriam',
   email: 'miriam@gmail.com',
   profile_id: 2,
+  status: 'INACTIVE',
 }, {
   id: 3,
   name: 'Aurelius',
   email: 'aurelius@gmail.com',
   profile_id: 1,
+  status: 'BLOCK'
 }]
 
 const profiles = [{
